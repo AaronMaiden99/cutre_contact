@@ -1,8 +1,10 @@
 <?php 
     $contacts = [];
 
-    if(file_exists("contacts.json")){
-        $contacts = json_decode(file_get_contents("contacts.json"), true); //ese true es para decirle que es un array asociativo
+    $conn = mysqli_connect("127.0.0.1", "root", "", "cutre_contacts");
+    $result = mysqli_query($conn, "select * from contacts");
+    while($contact = mysqli_fetch_assoc($result)){
+        $contacts[] = $contact;
     }
 ?>
 

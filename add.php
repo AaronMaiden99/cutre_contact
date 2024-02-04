@@ -1,3 +1,14 @@
+<?php 
+    if($_POST){
+        $contacts = [];
+        if(file_exists("contacts.json")){
+            $contacts = json_decode(file_get_contents("contacts.json"));
+        }
+        $contacts[] = $_POST;
+        file_put_contents("contacts.json", json_encode($contacts));
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,15 +48,15 @@
 </nav>
 
 <main class="container">
-    <form class="d-flex justify-content-center">
+    <form class="d-flex justify-content-center" method="POST" action="add.php">
             <div class="card mt-4">
                 <div class="card-header text-center">New Contact</div>
                 <div class="card-body  px-5 text-center">
-                      <input class="form-control" type="text" placeholder="Full name">
-                      <input class="form-control mt-3" type="text" placeholder="Phone number">
+                      <input name="name" class="form-control" type="text" placeholder="Full name">
+                      <input name="phone" class="form-control mt-3" type="text" placeholder="Phone number">
                      <div class="row mt-3">
                           <a href="#" class="btn btn-danger col me-3">Cancel</a>
-                          <a href="#" class="btn btn-primary col">Add</a>
+                          <input type="submit" value="Add" class="btn btn-primary col">
                      </div>
                 </div>
             </div>

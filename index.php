@@ -56,15 +56,20 @@
 
 <main class="container">
     <div class="row">
-        <!-- Contacto -->
+        
         <?php foreach($contacts as $contact): ?>
+        <!-- Contacto -->
         <div class="col-md-4">
             <div class="card px-3 mt-4">
                 <div class="card-body  text-center">
                     <h5 class="card-title fs-2"><?= $contact["name"] ?></h5>
                     <p class="card-text"><?= $contact["phone"] ?></p>
                     <div class="row">
-                        <a href="#" class="btn btn-danger col me-3">Delete</a>
+                        <!-- Eliminar contacto -->
+                        <form class="col me-3 p-0" action="delete.php" method="POST">
+                            <input class="dont-show" name="id" value="<?= $contact["id"] ?>">
+                            <input type="submit" value="Delete" class="btn btn-danger w-100">
+                        </form>
                         <a href="#" class="btn btn-warning col">Edit</a>
                     </div>
                 </div>

@@ -70,7 +70,13 @@
                             <input class="dont-show" name="id" value="<?= $contact["id"] ?>">
                             <input type="submit" value="Delete" class="btn btn-danger w-100">
                         </form>
-                        <a href="#" class="btn btn-warning col">Edit</a>
+                         <!-- Editar contacto -->
+                         <form class="col p-0" action="edit.php" method="GET">
+                             <input class="dont-show" name="id" value="<?= $contact["id"] ?>">
+                             <input class="dont-show" name="name" value="<?= $contact["name"] ?>">
+                             <input class="dont-show" name="phone" value="<?= $contact["phone"] ?>">
+                             <input type="submit" value="Edit" class="btn btn-warning w-100">
+                         </form>
                     </div>
                 </div>
             </div>

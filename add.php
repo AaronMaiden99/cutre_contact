@@ -1,11 +1,13 @@
 <?php 
     if($_POST){
-        $contacts = [];
-        if(file_exists("contacts.json")){
-            $contacts = json_decode(file_get_contents("contacts.json"));
-        }
-        $contacts[] = $_POST;
-        file_put_contents("contacts.json", json_encode($contacts));
+        $conn = mysqli_connect("127.0.0.1", "root", "", "cutre_contacts");
+       
+        $name = $_POST["name"];
+        $phone = $_POST["phone"];
+
+        $consulta = "insert into contacts(name, phone) values(\"$name\", \"$phone\");";
+       
+        mysqli_query($conn, $consulta);
         header("Location: index.php");
     }
 ?>

@@ -12,7 +12,7 @@
 <nav class="navbar navbar-expand-md bg-warning-subtle">
   <div class="container-fluid">
     <img width="60" src="img/logo.jpeg" alt="">
-    <a class="navbar-brand ms-3" href="#">Cutre_contacts</a>
+    <a class="navbar-brand ms-3" href="index.php">Cutre_contacts</a>
     <!-- boton desplegable -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -22,7 +22,7 @@
         <ul class="navbar-nav me-auto ">
             <!-- Boton añadir contacto-->
             <li class="nav-item me-3 my-2">
-                <button type="button" class="btn btn-outline-primary">Add Contact</button>
+                <a href="add.php" class="btn btn-outline-primary">Add Contact</a>
             </li>
              <!-- Buscar contacto-->
             <form class="d-flex my-2" role="search">

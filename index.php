@@ -2,7 +2,15 @@
     $contacts = [];
 
     $conn = mysqli_connect("127.0.0.1", "root", "", "cutre_contacts");
-    $result = mysqli_query($conn, "select * from contacts");
+    
+    if($_POST){
+        $filter = $_POST["filter"];
+        $result = mysqli_query($conn, "select * from contacts where name like \"%$filter%\";");
+    }else{
+        $result = mysqli_query($conn, "select * from contacts;");
+    }
+   
+    
     while($contact = mysqli_fetch_assoc($result)){
         $contacts[] = $contact;
     }
@@ -35,9 +43,9 @@
                 <a href="add.php" class="btn btn-outline-primary">Add Contact</a>
             </li>
              <!-- Buscar contacto-->
-            <form class="d-flex my-2" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+            <form action="index.php" method="POST" class="d-flex my-2" role="search">
+                <input name="filter" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <input value="Search" class="btn btn-outline-success" type="submit">
              </form>
        
       </ul>

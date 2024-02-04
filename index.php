@@ -32,7 +32,7 @@
     <img width="60" src="img/logo.jpeg" alt="">
     <a class="navbar-brand ms-3" href="index.php">Cutre_contacts</a>
     <!-- boton desplegable -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <!-- Contenido desplegable -->

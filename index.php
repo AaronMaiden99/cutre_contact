@@ -1,3 +1,11 @@
+<?php 
+    $contacts = [];
+
+    if(file_exists("contacts.json")){
+        $contacts = json_decode(file_get_contents("contacts.json"), true); //ese true es para decirle que es un array asociativo
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,11 +47,12 @@
 <main class="container">
     <div class="row">
         <!-- Contacto -->
+        <?php foreach($contacts as $contact): ?>
         <div class="col-md-4">
             <div class="card px-3 mt-4">
                 <div class="card-body  text-center">
-                    <h5 class="card-title fs-2">Pepito Martinez</h5>
-                    <p class="card-text">974 76 43 18</p>
+                    <h5 class="card-title fs-2"><?= $contact["name"] ?></h5>
+                    <p class="card-text"><?= $contact["phone"] ?></p>
                     <div class="row">
                         <a href="#" class="btn btn-danger col me-3">Delete</a>
                         <a href="#" class="btn btn-warning col">Edit</a>
@@ -51,58 +60,7 @@
                 </div>
             </div>
         </div>
-        <!-- Contacto -->
-        <div class="col-md-4">
-            <div class="card px-3 mt-4">
-                <div class="card-body  text-center">
-                    <h5 class="card-title fs-2">Pepito Martinez</h5>
-                    <p class="card-text">974 76 43 18</p>
-                    <div class="row">
-                        <a href="#" class="btn btn-danger col me-3">Delete</a>
-                        <a href="#" class="btn btn-warning col">Edit</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Contacto -->
-        <div class="col-md-4">
-            <div class="card px-3 mt-4">
-                <div class="card-body  text-center">
-                    <h5 class="card-title fs-2">Pepito Martinez</h5>
-                    <p class="card-text">974 76 43 18</p>
-                    <div class="row">
-                        <a href="#" class="btn btn-danger col me-3">Delete</a>
-                        <a href="#" class="btn btn-warning col">Edit</a>
-                    </div>
-                </div>
-             </div>
-        </div>
-        <!-- Contacto -->
-        <div class="col-md-4">
-            <div class="card px-3 mt-4">
-                <div class="card-body  text-center">
-                    <h5 class="card-title fs-2">Pepito Martinez</h5>
-                    <p class="card-text">974 76 43 18</p>
-                    <div class="row">
-                        <a href="#" class="btn btn-danger col me-3">Delete</a>
-                        <a href="#" class="btn btn-warning col">Edit</a>
-                    </div>
-                </div>
-             </div>
-        </div>
-        <!-- Contacto -->
-        <div class="col-md-4">
-            <div class="card px-3 mt-4">
-                <div class="card-body  text-center">
-                    <h5 class="card-title fs-2">Pepito Martinez</h5>
-                    <p class="card-text">974 76 43 18</p>
-                    <div class="row">
-                        <a href="#" class="btn btn-danger col me-3">Delete</a>
-                        <a href="#" class="btn btn-warning col">Edit</a>
-                    </div>
-                </div>
-             </div>
-        </div>
+        <?php endforeach ?>
     </div>
 </main>
     

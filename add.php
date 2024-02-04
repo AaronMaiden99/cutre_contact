@@ -6,6 +6,7 @@
         }
         $contacts[] = $_POST;
         file_put_contents("contacts.json", json_encode($contacts));
+        header("Location: index.php");
     }
 ?>
 
@@ -55,7 +56,7 @@
                       <input name="name" class="form-control" type="text" placeholder="Full name">
                       <input name="phone" class="form-control mt-3" type="text" placeholder="Phone number">
                      <div class="row mt-3">
-                          <a href="#" class="btn btn-danger col me-3">Cancel</a>
+                          <a href="index.php" class="btn btn-danger col me-3">Cancel</a>
                           <input type="submit" value="Add" class="btn btn-primary col">
                      </div>
                 </div>

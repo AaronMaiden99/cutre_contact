@@ -14,8 +14,11 @@
       
         while(mysqli_stmt_fetch($result)){
             $contacts[] = $contact;
-            //tenemos un error, cada vez que se añade un $contact, sobreescribe a los anteriores, haciendo que el $contacts
-            //contenga un monton de $contact iguales al ultimo añadido
+            
+            //hasta ahora, en cada fetch, volvia a guardar los datos en el array $contact, cambiando también el array $contacts
+            //Por eso ahora creamos un nuevo $contact, para que al hacer fetch, se guarden los datos en ese nuevo:
+            $contact = array("id"=>"", "name"=>"", "phone"=>"");
+            mysqli_stmt_bind_result($result, $contact["id"], $contact["name"], $contact["phone"]);        
        }
     }else{
         //Aqui no hace falta preparar la consulta porque no está paramaetrizada

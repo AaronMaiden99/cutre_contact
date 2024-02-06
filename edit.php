@@ -10,9 +10,9 @@
         $name = $_POST["name"];
         $phone = $_POST["phone"];
 
-        $conn = mysqli_connect("127.0.0.1", "root", "", "cutre_contacts");
-        $consulta =  mysqli_prepare($conn, "update contacts set name = ?, phone = ? where id = ?" );
-        mysqli_stmt_execute($consulta, [$name, $phone, $id]);
+        $conn = new mysqli("127.0.0.1", "root", "", "cutre_contacts");
+        $consulta = $conn->prepare("update contacts set name = ?, phone = ? where id = ?");
+        $consulta->execute([$name, $phone, $id]);
         header("Location: index.php");
     }  
 ?>

@@ -1,13 +1,13 @@
 <?php 
     if($_POST){
-        $conn = mysqli_connect("127.0.0.1", "root", "", "cutre_contacts");
-       
         $name = $_POST["name"];
         $phone = $_POST["phone"];
+        
+        $conn =  new mysqli("127.0.0.1", "root", "", "cutre_contacts");
 
-        $consulta = mysqli_prepare($conn, "insert into contacts(name, phone) values(?, ?)") ;
-        // mysqli_stmt_bind_param($consulta, "ss", $name, $phone);
-        mysqli_stmt_execute($consulta, [$name, $phone]);//Añadiendo un array con los parametros no hace falta vincularlos previamente
+        $consulta = $conn->prepare("insert into contacts(name, phone) values(?, ?)");
+        // $consulta->bind_param("ss", $name, $phone);
+        $consulta->execute([$name, $phone]);//Añadiendo un array con los parametros no hace falta vincularlos previamente
         header("Location: index.php");
     }
 ?>

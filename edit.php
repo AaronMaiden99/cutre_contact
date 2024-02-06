@@ -11,8 +11,8 @@
         $phone = $_POST["phone"];
 
         $conn = mysqli_connect("127.0.0.1", "root", "", "cutre_contacts");
-        $consulta = "update contacts set name = \"$name\", phone = \"$phone\" where id = $id;";
-        mysqli_query($conn, $consulta);
+        $consulta =  mysqli_prepare($conn, "update contacts set name = ?, phone = ? where id = ?" );
+        mysqli_stmt_execute($consulta, [$name, $phone, $id]);
         header("Location: index.php");
     }  
 ?>

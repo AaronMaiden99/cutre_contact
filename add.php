@@ -5,9 +5,9 @@
         $name = $_POST["name"];
         $phone = $_POST["phone"];
 
-        $consulta = "insert into contacts(name, phone) values(\"$name\", \"$phone\");";
-       
-        mysqli_query($conn, $consulta);
+        $consulta = mysqli_prepare($conn, "insert into contacts(name, phone) values(?, ?)") ;
+        // mysqli_stmt_bind_param($consulta, "ss", $name, $phone);
+        mysqli_stmt_execute($consulta, [$name, $phone]);//Añadiendo un array con los parametros no hace falta vincularlos previamente
         header("Location: index.php");
     }
 ?>

@@ -10,9 +10,9 @@
         $name = $_POST["name"];
         $phone = $_POST["phone"];
 
-        $conn = new mysqli("127.0.0.1", "root", "", "cutre_contacts");
-        $consulta = $conn->prepare("update contacts set name = ?, phone = ? where id = ?");
-        $consulta->execute([$name, $phone, $id]);
+        $conn = new PDO("mysql:host=127.0.0.1;dbname=cutre_contacts", "root", "");
+        $consulta = $conn->prepare("update contacts set name = :name, phone = :phone where id = :id");
+        $consulta->execute([":name"=>$name, ":phone"=>$phone, ":id"=> $id]);
         header("Location: index.php");
     }  
 ?>

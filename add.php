@@ -3,11 +3,12 @@
         $name = $_POST["name"];
         $phone = $_POST["phone"];
         
-        $conn =  new mysqli("127.0.0.1", "root", "", "cutre_contacts");
+        $conn =  new PDO("mysql:hot=127.0.0.1;dbname=cutre_contacts", "root", "");
 
-        $consulta = $conn->prepare("insert into contacts(name, phone) values(?, ?)");
-        // $consulta->bind_param("ss", $name, $phone);
-        $consulta->execute([$name, $phone]);//Añadiendo un array con los parametros no hace falta vincularlos previamente
+        $consulta = $conn->prepare("insert into contacts(name, phone) values(:name, :phone)");
+        // $consulta->bindParam(":name", $name);
+        // $consulta->bindParam(":phone", $phone);
+        $consulta->execute([":name"=>$name, ":phone"=>$phone]);//Añadiendo un array con los parametros no hace falta vincularlos previamente
         header("Location: index.php");
     }
 ?>

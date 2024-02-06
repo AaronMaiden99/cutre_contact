@@ -1,29 +1,24 @@
 <?php 
     $contacts = [];
 
-    $conn = new mysqli("127.0.0.1", "root", "", "cutre_contacts");
+    $conn = new PDO("mysql:host=127.0.0.1;dbname=cutre_contacts", "root", "");
     
     if($_POST){
         
         $filter = "%".$_POST["filter"]."%"; //no podemos meter % en el prepare, por lo que lo metemos directamente aquí
-        $result = $conn->prepare('select* from contacts where name like ?');
+        $result = $conn->prepare('select* from contacts where name like :filter');
       
-        $result->execute([$filter]);
-        $result->bind_result($contact["id"], $contact["name"], $contact["phone"]);
+        $result->execute([":filter"=>$filter]);
+        //no hay bind_result 
       
-        while($result->fetch()){
+        while($contact = $result->fetch(PDO::FETCH_ASSOC)){
             $contacts[] = $contact;
-            
-            //hasta ahora, en cada fetch, volvia a guardar los datos en el array $contact, cambiando también el array $contacts
-            //Por eso ahora creamos un nuevo $contact, para que al hacer fetch, se guarden los datos en ese nuevo:
-            $contact = array();//no es necesario nombrar los indices
-            $result->bind_result($contact["id"], $contact["name"], $contact["phone"]);       
-       }
+        }
     }else{
         //Aqui no hace falta preparar la consulta porque no está paramaetrizada, pero sí puede ponerse con estilo POO
         $result = $conn->query("select * from contacts");
               
-        while($contact = $result->fetch_assoc()){
+        while($contact = $result->fetch(PDO::FETCH_ASSOC)){ //PDO::FETCH_ASSOC es para que devuelva un array asociatio
              $contacts[] = $contact;
         }
     }

@@ -4,16 +4,28 @@
     $conn = mysqli_connect("127.0.0.1", "root", "", "cutre_contacts");
     
     if($_POST){
-        $filter = $_POST["filter"];
-        $result = mysqli_query($conn, "select * from contacts where name like \"%$filter%\";");
+        $filter = "%".$_POST["filter"]."%"; //no podemos meter % en el prepare, por lo que lo metemos directamente aquí
+        $result = mysqli_prepare($conn, 'select* from contacts where name like ?');
+       
+        mysqli_stmt_bind_param($result, 's', $filter);
+      
+        mysqli_stmt_execute($result);
+        mysqli_stmt_bind_result($result, $contact["id"], $contact["name"], $contact["phone"]);
+      
+        while(mysqli_stmt_fetch($result)){
+            $contacts[] = $contact;
+            //tenemos un error, cada vez que se añade un $contact, sobreescribe a los anteriores, haciendo que el $contacts
+            //contenga un monton de $contact iguales al ultimo añadido
+       }
     }else{
+        //Aqui no hace falta preparar la consulta porque no está paramaetrizada
         $result = mysqli_query($conn, "select * from contacts;");
+              
+        while($contact = mysqli_fetch_assoc($result)){
+             $contacts[] = $contact;
+        }
     }
-   
-    
-    while($contact = mysqli_fetch_assoc($result)){
-        $contacts[] = $contact;
-    }
+
 ?>
 
 <!DOCTYPE html>

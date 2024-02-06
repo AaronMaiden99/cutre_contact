@@ -4,7 +4,7 @@
         $id = $_POST["id"];
       
         $statement = mysqli_prepare($conn, 'delete from contacts where id=?' );
-        mysqli_stmt_bind_param($statement, 's', $id);
+        mysqli_stmt_bind_param($statement, 'i', $id);
         mysqli_stmt_execute($statement);
        
         header("Location: index.php");
